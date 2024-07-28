@@ -1,2 +1,1 @@
-web: python web.py
-worker: python run.py
+web: node index.js
