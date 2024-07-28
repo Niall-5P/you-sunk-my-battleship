@@ -56,6 +56,15 @@ def valid_coordinates(x, y, board):
 
 
 def populate_board(board):
+    """
+    Function to randomly place ships on the board.
+    """
+    while len(board.ships) < board.num_ships:
+        x, y = random_point(board.size), random_point(board.size)
+        if valid_coordinates(x, y, board):
+            board.add_ship(x, y, board.type)
+
+    
 
 
 
