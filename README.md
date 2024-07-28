@@ -40,6 +40,20 @@ No errors were returned from PEP8online.com
 
 ![Alt text](battleship.png)
 
+- input validation and error-checking
+- cannot enter coordinates outside the size of the grid
+- you must enter numbers
+
+![Alt text](invalidinput.png) 
+
+## Testing
+- I used PEP8 linter and confirmed no problems
+- Tested in my local terminal and the Code institute terminal
+
+## Bugs
+# Solved bugs
+- It would not deploy in Heroku terminal, this was due to eco dyno not being activated we believe
+
 Credits
 - Code Institute walkthrough videos.
 - [Video tutorial](https://www.youtube.com/watch?v=tF1WRCrd_HQ&t=6s)
