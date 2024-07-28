@@ -1,3 +1,7 @@
+from flask import Flask
+import os
+import signal
+import sys
 from random import randint
 
 scores = {"computer": 0, "player": 0}
@@ -118,3 +122,19 @@ def new_game():
     print("-" * 35)
     player_name = input("Please enter your name: \n")
     print("-" * 35)
+
+    # Flask app for Heroku
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Welcome to YOU SUNK MY BATTLESHIP!"
+
+def handle_sigterm(*args):
+    print("SIGTERM received, shutting down...")
+    sys.exit(0)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    signal.signal(signal.SIGTERM, handle_sigterm)
+    app.run(host='0.0.0.0', port=port)
