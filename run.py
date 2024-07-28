@@ -35,7 +35,7 @@ def guess(self, x, y):
 def add_ship(self, x, y, type="computer"):
     if len(self.ships) >= self.num_ships:
         print("Error: you cannot add any more ships!")
-        else:
+    else:
             self.ships.append((x, y))
             if self.type == "player":
                 self.board[x][y] = "@"
@@ -66,33 +66,6 @@ def populate_board(board):
 
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def make_guess(board):
     """
     Function to make a guess on the board.
@@ -101,47 +74,6 @@ def make_guess(board):
     while not valid_coordinates(x, y, board):
         x, y = random_point(board.size), random_point(board.size)
     return board.guess(x, y)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def play_game(computer_board, player_board):
@@ -166,45 +98,6 @@ def play_game(computer_board, player_board):
             scores["computer"] += 1
         
         print(f"Scores - Player: {scores['player']}, Computer: {scores['computer']}")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
