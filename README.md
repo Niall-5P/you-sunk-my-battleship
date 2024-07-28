@@ -32,15 +32,13 @@ The game is primarily managed through the `Board` class, which includes:
 ## Validator Testing
 - PEP8
 No errors were returned from PEP8online.com
-## Troubleshooting Deployment Issues
 
-### Deployment Failure
+## Existing features
+- Random board generation
+- Play against the computer
+- Keeps scores
 
-If you encounter issues while deploying your application to Heroku, here are some steps to help diagnose and resolve common problems:
-
-1. **Check Logs**: View the Heroku logs to get more information about the error. Use the following command to tail the logs:
-   ```sh
-   heroku logs --tail
+![Alt text](battleship.png)
 
 Credits
 - Code Institute walkthrough videos.

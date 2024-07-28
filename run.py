@@ -82,8 +82,18 @@ def play_game(computer_board, player_board):
     while scores["computer"] < computer_board.num_ships and scores["player"] < player_board.num_ships:
         player_board.print()
         computer_board.print()
-        
-        x, y = int(input("Guess a row: ")), int(input("Guess a column: "))
+
+        while True:
+            try:
+                x = int(input("Guess a row: "))
+                y = int(input("Guess a column: "))
+                if 0 <= x < computer_board.size and 0 <= y < computer_board.size:
+                    break
+                else:
+                    print("Coordinates out of range. Please try again.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+
         result = computer_board.guess(x, y)
         print(f"Player guessed ({x}, {y}) and it was a {result}")
 
@@ -95,8 +105,9 @@ def play_game(computer_board, player_board):
 
         if comp_result == "Hit":
             scores["computer"] += 1
-        
+
         print(f"Scores - Player: {scores['player']}, Computer: {scores['computer']}")
+
 
 
 def new_game():
