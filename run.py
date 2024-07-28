@@ -47,3 +47,144 @@ def random_point(size):
     return randint(0, size - 1)
 
 
+def valid_coordinates(x, y, board):
+    """
+    Helper function to check if the coordinates are valid (i.e., within the board and not already taken).
+    """
+    return 0 <= x < board.size and 0 <= y < board.size and board.board[x][y] == "."
+
+
+
+def populate_board(board):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def make_guess(board):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def play_game(computer_board, player_board):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def new_game():
+    """
+    Starts a new game. Seta the board size and number of ships, resets the scores and initialises the boards.
+    """
+
+
+    size = 5
+    num_ships = 4
+    scores["computer"] = 0
+    scores["player"] = 0
+    print("-" * 35)
+    print(" Welcome to YOU SUNK MY BATTLESHIP!!")
+    print(f" Board Size: {size}. Number of ships: {num_ships}")
+    print(" Top left corner is row: 0, col: 0")
+    print("-" * 35)
+    player_name = input("Please enter your name: \n")
+    print("-" * 35)
