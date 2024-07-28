@@ -1,3 +1,14 @@
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "You Sunk My Battleship game is running as a worker."
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
+
+
 from random import randint
 
 scores = {"computer": 0, "player": 0}
