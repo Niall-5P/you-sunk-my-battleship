@@ -21,3 +21,16 @@ def __init__(self, size, num_ships, name, type):
 def print(self):
     for row in self.board:
         print(" ".join(row))
+
+def guess(self, x, y):
+    self.guesses.append((x, y))
+    self.board[x][y] = "x"
+
+    if (x, y) in self.ships:
+        self.board[x][y] = "*"
+        return "Hit"
+    else:
+        return "Miss"
+
+def add_ship(self, x, y, type="computer"):
+Added guess and add_ship methods to Board class for handling player/computer guesses and ship placements
