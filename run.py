@@ -33,4 +33,10 @@ def guess(self, x, y):
         return "Miss"
 
 def add_ship(self, x, y, type="computer"):
-Added guess and add_ship methods to Board class for handling player/computer guesses and ship placements
+    if len(self.ships) >= self.num_ships:
+        print("Error: you cannot add any more ships!")
+        else:
+            self.ships.append((x, y))
+            if self.type == "player":
+                self.board[x][y] = "@"
+
