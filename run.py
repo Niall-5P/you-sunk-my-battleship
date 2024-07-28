@@ -94,6 +94,13 @@ def populate_board(board):
 
 
 def make_guess(board):
+    """
+    Function to make a guess on the board.
+    """
+    x, y = random_point(board.size), random_point(board.size)
+    while not valid_coordinates(x, y, board):
+        x, y = random_point(board.size), random_point(board.size)
+    return board.guess(x, y)
 
 
 
