@@ -40,3 +40,10 @@ def add_ship(self, x, y, type="computer"):
             if self.type == "player":
                 self.board[x][y] = "@"
 
+def random_point(size):
+    """
+    Helper function to return a random integer between 0 and size
+    """
+    return randint(0, size - 1)
+
+
