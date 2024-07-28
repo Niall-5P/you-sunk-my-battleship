@@ -145,6 +145,27 @@ def make_guess(board):
 
 
 def play_game(computer_board, player_board):
+    """
+    Main function to play the game.
+    """
+    while scores["computer"] < computer_board.num_ships and scores["player"] < player_board.num_ships:
+        player_board.print()
+        computer_board.print()
+        
+        x, y = int(input("Guess a row: ")), int(input("Guess a column: "))
+        result = computer_board.guess(x, y)
+        print(f"Player guessed ({x}, {y}) and it was a {result}")
+
+        if result == "Hit":
+            scores["player"] += 1
+
+        comp_result = make_guess(player_board)
+        print(f"Computer guessed and it was a {comp_result}")
+
+        if comp_result == "Hit":
+            scores["computer"] += 1
+        
+        print(f"Scores - Player: {scores['player']}, Computer: {scores['computer']}")
 
 
 
