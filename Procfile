@@ -1,1 +1,1 @@
-web: node index.js
+worker: python your_script.py
