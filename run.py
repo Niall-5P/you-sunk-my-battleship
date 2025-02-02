@@ -77,7 +77,7 @@ def valid_coordinates(x, y, board):
     """
     Check if the given (x, y) is valid:
       - Within the board bounds
-      - The cell has not been guessed or used before
+      - The cell is '.'
     """
     if 0 <= x < board.size and 0 <= y < board.size:
         return board.board[x][y] == "."
@@ -96,11 +96,62 @@ def populate_board(board):
             board.add_ship(x, y)
 
 
+def can_still_guess(board):
+    """
+    Returns True if there is at least one '.' on the board,
+    meaning there's a valid guess remaining.
+    """
+    for row in board.board:
+        if "." in row:
+            return True
+    return False
+
+
+def check_for_stalemate(player_board, computer_board):
+    """
+    If both boards have no '.' squares left,
+    neither side can make a valid guess anymore.
+    
+    Decide the outcome by comparing scores:
+      - If player score > computer score => player wins
+      - If computer score > player score => computer wins
+      - Otherwise, it's a tie
+    
+    Returns:
+        bool: True if a stalemate was detected and handled,
+              False otherwise.
+    """
+    player_can_guess = can_still_guess(player_board)
+    computer_can_guess = can_still_guess(computer_board)
+
+    # If neither side has valid squares left
+    if (not player_can_guess) and (not computer_can_guess):
+        print("\nNo more valid moves left on either board!")
+        print("Final Scores -> Player: {}, Computer: {}".format(
+            scores['player'], scores['computer']))
+
+        if scores["player"] > scores["computer"]:
+            print("Stalemate, but you have more hits! You are the winner!")
+        elif scores["computer"] > scores["player"]:
+            print("Stalemate, but the computer has more hits! Computer wins!")
+        else:
+            print("Stalemate, and it's a tie!")
+
+        return True
+
+    return False
+
+
 def make_guess(board):
     """
     Make a random guess for the computer on the given board,
     ensuring it's a valid coordinate that hasn't been tried.
+    If no valid coordinates remain, return "No Moves".
     """
+    if not can_still_guess(board):
+        # No valid coordinates left at all
+        return "No Moves"
+
     x = random_point(board.size)
     y = random_point(board.size)
     while not valid_coordinates(x, y, board):
@@ -115,8 +166,8 @@ def get_user_guess(board):
     within the board until a valid guess is obtained.
     
     Returns:
-        tuple: (x, y) as integers within the board's range and not 
-        already guessed.
+        tuple: (x, y) as integers within the board's range 
+               and not already guessed.
     """
     while True:
         try:
@@ -141,16 +192,18 @@ def get_user_guess(board):
 def play_game(computer_board, player_board):
     """
     Main function to play the game until either side sinks
-    all of the opponent's ships.
+    all of the opponent's ships or until a stalemate is detected.
     """
     while (scores["computer"] < computer_board.num_ships and
            scores["player"] < player_board.num_ships):
-        
-        # Print boards (optional: you may hide computer board’s ships)
-        player_board.print()
-        computer_board.print()
+
+        # Check if there's a stalemate before the player's turn
+        if check_for_stalemate(player_board, computer_board):
+            return  # End the game loop if stalemate was handled
 
         # Player's turn
+        player_board.print()
+        computer_board.print()
         print("Player's Turn:")
         x, y = get_user_guess(computer_board)
         result = computer_board.guess(x, y)
@@ -158,23 +211,33 @@ def play_game(computer_board, player_board):
         if result == "Hit":
             scores["player"] += 1
 
-        # Check win condition immediately
+        # Check if the player sank all computer's ships
         if scores["player"] == computer_board.num_ships:
             print("Congratulations! You sank all the computer's ships!")
-            break
+            return
+
+        # Check stalemate again before the computer's turn
+        if check_for_stalemate(player_board, computer_board):
+            return
 
         # Computer's turn
         print("\nComputer's Turn:")
         comp_result = make_guess(player_board)
-        print(f"Computer guessed and it was a {comp_result}")
-        if comp_result == "Hit":
-            scores["computer"] += 1
 
-        # Check win condition
-        if scores["computer"] == player_board.num_ships:
-            print(f"Sorry, {player_board.name}, "
-                  "the computer sank all of your ships!")
-            break
+        if comp_result == "No Moves":
+            # The computer can't make a valid guess -> stalemate scenario
+            if check_for_stalemate(player_board, computer_board):
+                return
+        else:
+            print(f"Computer guessed and it was a {comp_result}")
+            if comp_result == "Hit":
+                scores["computer"] += 1
+
+            # Check if the computer sank all player's ships
+            if scores["computer"] == player_board.num_ships:
+                print(f"Sorry, {player_board.name}, "
+                      "the computer sank all of your ships!")
+                return
 
         print(f"\nScores -> Player: {scores['player']}, "
               f"Computer: {scores['computer']}\n")
