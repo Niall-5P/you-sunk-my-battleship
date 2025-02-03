@@ -1,60 +1,102 @@
-Welcome to "You Sunk My Battleship!" This is a simple console-based implementation of the classic Battleship game, where you can play against the computer. The objective is to guess the locations of the opponent's ships and sink them before they sink yours.
+# You Sunk My Battleship!
+
+**You Sunk My Battleship!** is a simple console-based version of the classic Battleship game, where you and the computer each have 4 ships hidden on a 5×5 grid. The objective is to guess the opponent’s ship locations and sink them all before they sink yours.
+
+---
 
 ## How to Play
 
-1. **Start the Game**: Run the script to start the game. You will be prompted to enter your name.
-2. **Game Board**: The game board is a 5x5 grid. The top left corner is (0, 0).
-3. **Place Ships**: The computer and the player will place their ships randomly on their respective boards.
-4. **Make a Guess**: On your turn, input the coordinates (row and column) to guess where the computer's ships are located.
-5. **Hit or Miss**: The game will indicate whether your guess was a hit or a miss. The computer will also make guesses on your board.
-6. **Win the Game**: The game continues until all ships of one player are sunk. The player who sinks all the opponent's ships first wins.
+1. **Start the Game**  
+   - Run the Python file (`python3 run.py`) in your terminal.
+   - Enter your name when prompted.
+
+2. **Board Setup**  
+   - Both you and the computer have a 5×5 board.
+   - Each board randomly places 4 single-square ships.
+
+3. **Turns & Guesses**  
+   - On your turn, enter a row and column (both 0-based) to guess where the computer’s ships might be.  
+   - The computer then guesses on your board.
+
+4. **Hits & Misses**  
+   - A correct guess is marked with `*`.  
+   - An incorrect guess is marked with `x`.  
+
+5. **Winning**  
+   - The game ends when either you or the computer has 4 hits (one for each ship).  
+   - If you hit all of the computer’s ships first, you win!
+
+---
 
 ## Features
 
-- Random placement of ships on the board.
-- Turn-based guessing system between the player and the computer.
-- Real-time display of the game board after each guess.
-- Score tracking to keep track of hits for both the player and the computer.
+- **Random Ship Placement**  
+  Each board has 4 randomly placed ships at the start of the game.  
+
+- **Turn-Based Gameplay**  
+  You and the computer alternate guesses until one side’s ships are all sunk.
+
+- **Input Validation**  
+  - Prevents guessing the same spot more than once.  
+  - Ensures guesses are within the 5×5 grid.  
+  - Accepts only numeric input for row and column.
+
+- **Score Tracking**  
+  - Each successful hit increments the hits counter.  
+  - The game immediately ends when hits == number of ships (4).
+
+---
 
 ## Data Model
 
-The game is primarily managed through the `Board` class, which includes:
+All game logic is handled via a `Board` class:
 
-- `size`: The size of the board (5x5 grid).
-- `board`: A 2D list representing the game board.
-- `num_ships`: The number of ships on the board.
-- `name`: The name of the player.
-- `type`: The type of the board (player or computer).
-- `guesses`: A list of guesses made.
-- `ships`: A list of ship coordinates.
+- `size` — The board dimension (default 5).  
+- `board` — 2D list of `"."` (unrevealed), `"x"` (miss), or `"*"` (hit).  
+- `ships` — List of `(row, col)` coordinates indicating ship placements.  
+- `num_ships` — Number of ships on the board (default 4).  
+- `guesses` — List of `(row, col)` guesses made on this board.
 
-
-## Validator Testing
-- PEP8
-No errors were returned from PEP8online.com
-
-## Existing features
-- Random board generation
-- Play against the computer
-- Keeps scores
-
-![Alt text](battleship.png)
-
-- input validation and error-checking
-- cannot enter coordinates outside the size of the grid
-- you must enter numbers
-
-![Alt text](invalidinput.png) 
+---
 
 ## Testing
-- I used PEP8 linter and confirmed no problems
-- Tested in my local terminal and the Code institute terminal
+
+- **Manual Testing**  
+  - Tried invalid coordinates (out of range, repeated guesses) to confirm the game rejects them properly.  
+  - Ensured the game stops exactly when one side hits all 4 ships.
+
+- **PEP8 Validation**  
+  - Code was checked with a PEP8 linter to ensure adherence to style guidelines.
+
+---
 
 ## Bugs
-# Solved bugs
-- It would not deploy in Heroku terminal, this was due to eco dyno not being activated we believe
 
-Credits
-- Code Institute walkthrough videos.
-- [Video tutorial](https://www.youtube.com/watch?v=tF1WRCrd_HQ&t=6s)
-- ChatGPT to help troubleshoot deployment but no luck.
+### Solved Bug
+
+- **`@` Symbol for Player Ships**  
+  Originally, player ships were visibly marked with `@` and the computer never guessed those cells. This was fixed by storing ship locations in `board.ships` (internally) and leaving cells as `"."` until guessed, ensuring the computer can properly target them.
+
+### Remaining Bugs
+
+- None currently known.
+
+---
+
+## Deployment
+
+1. **Local Execution**  
+   - Clone/download the repository.  
+   - Ensure Python 3.x is installed.  
+   - Run `python3 run.py` in your terminal.
+
+2. **Hosting Options**  
+   - You can deploy to platforms like Heroku. Be sure to configure buildpacks (Python) and set the correct start script or `Procfile`.
+
+---
+
+## Credits
+
+- **Code Institute** — Inspiration for the terminal-based deployment concept.  
+- **Wikipedia** — Background on classic Battleship rules.  
+- **ChatGPT** — Assistance in debugging and refactoring code logic.
