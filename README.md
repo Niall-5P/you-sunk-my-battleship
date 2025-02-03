@@ -6,6 +6,8 @@
 
 ## How to Play
 
+![Alt Text](battleship.png) 
+
 1. **Start the Game**  
    - Run the Python file (`python3 run.py`) in your terminal.
    - Enter your name when prompted.
