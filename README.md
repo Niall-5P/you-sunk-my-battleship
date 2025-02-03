@@ -94,6 +94,7 @@ All game logic is handled via a `Board` class:
 
 2. **Hosting Options**  
    - You can deploy to platforms like Heroku. Be sure to configure buildpacks (Python) and set the correct start script or `Procfile`.
+   - https://you-sunk-my-battleship12-3fe29b1522b1.herokuapp.com/
 
 ---
 
